@@ -71,3 +71,7 @@ resources/.arch-internal-preview.css
 
 # Log file
 *.log
+
+.mvn/wrapper
+
+application.properties

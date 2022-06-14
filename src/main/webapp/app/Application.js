@@ -15,6 +15,13 @@ Ext.define('Study.Application', {
         }
     },
 
+    // application 이 뜨면서 login.js를 호출한다
+    launch : function(){
+      Ext.widget("login"); 
+      //  class명으로도 가능
+      //   Ext.create("Study.view.main.Main");
+    },
+
     onAppUpdate: function () {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
             function (choice) {
