@@ -1,6 +1,8 @@
  Ext.define('Study.view.member.MemberList', {
     extend: 'Ext.grid.Panel',
     xtype: 'memberList',
+    controller : 'memberList',
+    viewModel : 'memberList',
     title : '회원목록',
     columnLines : true,
     plugins : 'cellediting',
@@ -51,30 +53,8 @@
         flex : 1
     }
     ],
-    store : {
-        fields : ['productNm', 'price', 'amount', 'rgstrDt'],
-        data : [{
-            productNm : '지우개',
-            price : 500,
-            amount : 100,
-            rgstrDt : new Date()
-        },{
-            productNm : '지우개',
-            price : 500,
-            amount : 100,
-            rgstrDt : new Date()
-        },{
-            productNm : '지우개',
-            price : 500,
-            amount : 100,
-            rgstrDt : new Date()
-        },{
-            productNm : '지우개',
-            price : 500,
-            amount : 100,
-            rgstrDt : new Date()
-        }
-        ]
+    bind : {
+        store : '{memberList}'
     },
     bbar : {
         xtype: 'pagingtoolbar',
@@ -83,7 +63,4 @@
         displayInfo : true,
 
     }
-
-
-  
 });

@@ -1,6 +1,8 @@
  Ext.define('Study.view.main.Main', {
     extend: 'Ext.container.Viewport',
     xtype: 'main',
+    controller : 'main',
+    viewModel : 'main',
     layout : 'border',
     items : [{
         xtype : 'panel',
@@ -18,19 +20,10 @@
                 text : 'xxx님',
                 menu : [{
                     text : '비밀번호 변경',
-                    handler : function(btn){
-                        Ext.widget ("updatePassword");
-
-                    }
+                    handler : 'updatePasswordBtn'
                 },{
                     text : '로그아웃',
-                    handler : function(btn){
-                        //1. 뷰포트 삭제
-                        btn.up("viewport").destroy();
-                        //2. 로그인 윈도우 출력
-                        // Ext.create("Study.view.login.Login");
-                        Ext.widget("login");
-                    }
+                    handler : 'logoutBtn'
                 }]
             }]
         }]
@@ -43,16 +36,7 @@
         items : [{
             xtype : 'treelist',
             listeners : {
-                selectionchange : function ( obj, record ) {
-                    // 클릭한 cell에 대한 값을 가져올 때 recod.get을 사용한다.
-                    console.log(record.get("page"));
-
-                    var centerPage =  obj.up("viewport").down("component[region=center]");
-                    centerPage.removeAll(true);
-                    centerPage.add({
-                        xtype : record.get("page")
-                    })
-                }
+                selectionchange : 'menuChange'
             },
             store : {
                 root : {

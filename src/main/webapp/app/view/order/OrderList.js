@@ -1,6 +1,12 @@
  Ext.define('Study.view.order.OrderList', {
     extend: 'Ext.grid.Panel',
     xtype: 'orderList',
+    controller : 'orderList',
+    viewModel : 'orderList',
+    // 동일함
+    // viewModel : {
+    //     type : 'orderList'
+    // }
     title : '주문목록',
     columnLines : true,
     tbar : [{
@@ -44,38 +50,12 @@
         widget : {
             xtype : 'button',
             text : '배송정보',
-            handler : function(btn){
-                var record = btn.getWidgetRecord();
-                console.log(record.get("amount"));
-                console.log(record.get("price"));
-            }
+            handler : 'deliveryInfoBtn'
         }
     }
     ],
-    store : {
-        fields : ['productNm', 'price', 'amount', 'rgstrDt'],
-        data : [{
-            productNm : '지우개',
-            price : 500,
-            amount : 101,
-            rgstrDt : new Date()
-        },{
-            productNm : '지우개',
-            price : 500,
-            amount : 102,
-            rgstrDt : new Date()
-        },{
-            productNm : '지우개',
-            price : 500,
-            amount : 103,
-            rgstrDt : new Date()
-        },{
-            productNm : '지우개',
-            price : 500,
-            amount : 104,
-            rgstrDt : new Date()
-        }
-        ]
+    bind : {
+        store : '{orderList}'
     },
     bbar : {
         xtype : 'pagingtoolbar',

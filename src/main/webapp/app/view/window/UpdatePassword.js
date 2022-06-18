@@ -1,6 +1,8 @@
  Ext.define('Study.view.window.UpdatePassword', {
     extend: 'Ext.window.Window',
     xtype: 'updatePassword',
+    controller : 'updatePassword',
+    viewModel : 'updatePassword',
     width: 350,
     height: 200,
     title : '비밀번호 변경',
@@ -23,10 +25,12 @@
     }],
     bbar :[{
         xtype : 'button',
-        text : '비밀번호 변경'
+        text : '비밀번호 변경',
+        handler : 'changeBtn'
     },{
         xtype : 'button',
-        text : '닫 기'
+        text : '닫 기',
+        handler : 'closeBtn'
     }
     ]
   

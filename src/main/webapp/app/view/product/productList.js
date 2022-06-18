@@ -1,6 +1,8 @@
  Ext.define('Study.view.product.ProductList', {
     extend: 'Ext.panel.Panel',
     xtype: 'productList',
+    controller : 'productList',
+    viewModel : 'productList',
     title : '상품목록',
     items : [{
         xtype : 'toolbar',
@@ -50,31 +52,10 @@
             flex : 1
         }
         ],
-        store : {
-            fields : ['productNm', 'price', 'amount', 'rgstrDt'],
-            data : [{
-                productNm : '지우개',
-                price : 500,
-                amount : 100,
-                rgstrDt : new Date()
-            },{
-                productNm : '지우개',
-                price : 500,
-                amount : 100,
-                rgstrDt : new Date()
-            },{
-                productNm : '지우개',
-                price : 500,
-                amount : 100,
-                rgstrDt : new Date()
-            },{
-                productNm : '지우개',
-                price : 500,
-                amount : 100,
-                rgstrDt : new Date()
-            }
-            ]
+        bine : {
+            store : '{productList}'
         }
+
 
     }], 
 
