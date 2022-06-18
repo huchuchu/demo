@@ -39,6 +39,17 @@
         text : '등록일',
         dataIndex : 'rgstrDt',
         flex : 1
+    },{
+        xtype : 'widgetcolumn',
+        widget : {
+            xtype : 'button',
+            text : '배송정보',
+            handler : function(btn){
+                var record = btn.getWidgetRecord();
+                console.log(record.get("amount"));
+                console.log(record.get("price"));
+            }
+        }
     }
     ],
     store : {
@@ -46,25 +57,29 @@
         data : [{
             productNm : '지우개',
             price : 500,
-            amount : 100,
+            amount : 101,
             rgstrDt : new Date()
         },{
             productNm : '지우개',
             price : 500,
-            amount : 100,
+            amount : 102,
             rgstrDt : new Date()
         },{
             productNm : '지우개',
             price : 500,
-            amount : 100,
+            amount : 103,
             rgstrDt : new Date()
         },{
             productNm : '지우개',
             price : 500,
-            amount : 100,
+            amount : 104,
             rgstrDt : new Date()
         }
         ]
+    },
+    bbar : {
+        xtype : 'pagingtoolbar',
+        displayInfo : true
     }
 
   

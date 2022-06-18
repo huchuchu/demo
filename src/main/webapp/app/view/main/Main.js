@@ -17,9 +17,20 @@
                 xtype : 'button',
                 text : 'xxx님',
                 menu : [{
-                    text : '비밀번호 변경'
+                    text : '비밀번호 변경',
+                    handler : function(btn){
+                        Ext.widget ("updatePassword");
+
+                    }
                 },{
-                    text : '로그아웃'
+                    text : '로그아웃',
+                    handler : function(btn){
+                        //1. 뷰포트 삭제
+                        btn.up("viewport").destroy();
+                        //2. 로그인 윈도우 출력
+                        // Ext.create("Study.view.login.Login");
+                        Ext.widget("login");
+                    }
                 }]
             }]
         }]
@@ -57,7 +68,7 @@
                             leaf : true
                         }]
                     },{
-                        text : 'wnans관리',
+                        text : '주문관리',
                         iconCls : 'fab fa-first-order',
                         expanded : true,
                         selectable : false,

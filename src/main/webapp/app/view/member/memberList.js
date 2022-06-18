@@ -2,6 +2,8 @@
     extend: 'Ext.grid.Panel',
     xtype: 'memberList',
     title : '회원목록',
+    columnLines : true,
+    plugins : 'cellediting',
     tbar : [{
         xtype : 'combo',
         displayField : 'a',
@@ -25,15 +27,24 @@
     },{
         text : '상품명',
         dataIndex : 'productNm',
-        flex : 1
+        flex : 1,
+        editor : {
+            xtype : 'textfield'
+        }
     },{
         text : '가격',
         dataIndex : 'price',
-        flex : 1
+        flex : 1,
+        editor : {
+            xtype : 'numberfield'
+        }
     },{
         text : '재고량',
         dataIndex : 'amount',
-        flex : 1
+        flex : 1,
+        editor : {
+            xtype : 'numberfield'
+        }
     },{
         text : '등록일',
         dataIndex : 'rgstrDt',
@@ -64,6 +75,13 @@
             rgstrDt : new Date()
         }
         ]
+    },
+    bbar : {
+        xtype: 'pagingtoolbar',
+        // plugins : 'ux-slidingpager',
+        plugins : 'ux-progressbarpager',
+        displayInfo : true,
+
     }
 
 
