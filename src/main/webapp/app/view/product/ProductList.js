@@ -3,31 +3,46 @@
     xtype: 'productList',
     controller : 'productList',
     viewModel : 'productList',
-    title : '상품목록',
+    listeners : {
+        boxready : 'onLoadData',
+        resize : 'setGridHeight'
+    },
+    title : '상품목록 조회',
     items : [{
         xtype : 'toolbar',
         items : [{
             xtype : 'textfield',
-            fieldLabel  : '상품명'
+            fieldLabel  : '상품명',
+            name : 'itemNm'
         },{
             xtype : 'numberfield',
-            fieldLabel  : '가격'
+            fieldLabel  : '가격',
+            name : 'itemPrc'
 
         },{
             xtype : 'numberfield',
-            fieldLabel  : '재고량'
+            fieldLabel  : '재고량',
+            name : 'itemAmt'
 
         },{
             xtype : 'button',
-            text : '등록'
+            text : '저장'
+        },{
+            xtype: 'button',
+            text : '초기화'
         }
         ]
     },{
         xtype : 'grid',
+        viewConfig : {
+            emptyText : '상품이 존재하지않습니다'
+        },
+        height: 150, // buffer 쓸 때는 지정해줘야함
+        border: true,
         columnLines : true,
         tbar : [{
             xtype : 'textfield',
-            emptyText : '검색어를 입력하세요'
+            emptyText : '찾을 상품명을 입력하세요'
         },{
             xtype : 'button',
             text : '검색'
@@ -55,8 +70,6 @@
         bine : {
             store : '{productList}'
         }
-
-
     }], 
 
 

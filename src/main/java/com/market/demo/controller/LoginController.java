@@ -20,8 +20,7 @@ public class LoginController {
 	private LoginDao logindao;
 	
 	@RequestMapping(value="/loginInfo", method = RequestMethod.POST)
-	public Map<String, Object> loginInfo(Admin param, HttpServletRequest req) {
-		
+	public Map<String, Object> loginInfo(Admin param, HttpServletRequest req) {		
 		Map<String, Object> result = null;
 		try {
 			Map<String, Object> session = (Map<String, Object>) req.getSession().getAttribute("admin");
