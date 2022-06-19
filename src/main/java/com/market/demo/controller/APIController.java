@@ -65,8 +65,21 @@ public class APIController {
 	 * @return
 	 */
 	@RequestMapping(value = "/add/Product", method = RequestMethod.POST)
-	public Map<String, Object> addProduct(){
-		Map<String, Object> result = null;
+	public Map<String, Object> addProduct(Product param){
+
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		try {
+			apiService.addProduct(param);
+			result.put("code", 200);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			result.put("code", e.getMessage());
+			result.put("msg", "상품등록실패");
+			return result;
+		}
+	
 		
 		return result;
 	}

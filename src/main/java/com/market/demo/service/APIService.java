@@ -23,5 +23,9 @@ public class APIService {
 	public List<Map<String, Object>> listProduct(Product param) throws SQLException{
 		return apiDao.listProduct(param);
 	}
+	
+	public void addProduct(Product param) throws SQLException{
+		apiDao.addProduct(param);		
+	}
 
 }

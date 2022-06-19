@@ -23,9 +23,16 @@ public class APIDao {
 	}
 
 	public List<Map<String, Object>> listProduct(Product param) throws SQLException {
-		String query = "select item_name productNm, item_price price, item_amount amount, item_regdate regstrDt  from item";	
+		String query = "select item_name itemNm, item_price itemPrc, item_amount itemAmt, item_regdate itemRegDt  from item";	
 		
 		return jdbcTemplate.queryForList(query);
+	}
+
+	public void addProduct(Product param) throws SQLException {
+		
+		String query = "insert into item (item_name, item_price, item_amount, item_regdate) values(?,?,?,now())";
+		jdbcTemplate.update(query, new Object[] {param.getItemNm(), param.getItemPrc(), param.getItemAmt()});
+	
 	}
 	
 	

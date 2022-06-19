@@ -3,7 +3,7 @@ Ext.define("Study.store.ProductList",{
 	alias : 'store.productList',
 	storeId : 'productList',
 	autoLoad : false,
-    fields : ['productNm', 'price', 'amount', 'rgstrDt'],
+    fields : ['itemSeq','itemNm','itemPrc','itemAmt','itemRegDt'],
     proxy : {
         type : 'ajax',
         actionMethods : {
@@ -12,7 +12,7 @@ Ext.define("Study.store.ProductList",{
         url : '/api/list/product',
         reader :{
             type : 'json',
-            rootProperty : 'data',
+            rootProperty  : 'data',
             totalProperty : 'totalCount'
         }
     }

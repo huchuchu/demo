@@ -7,11 +7,19 @@ public class Product {
 	private Integer itemSeq;
 	private String itemNm;
 	private Integer itemPrc;
+	private Integer itemAmt;
 	private Date itemRegDt;
 	private String searchValue;
 	private int start;
 	private int limit;
+
 	
+	public Integer getItemAmt() {
+		return itemAmt;
+	}
+	public void setItemAmt(Integer itemAmt) {
+		this.itemAmt = itemAmt;
+	}
 	
 	public Integer getItemSeq() {
 		return itemSeq;
