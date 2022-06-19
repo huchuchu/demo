@@ -18,10 +18,12 @@
             pack : 'center'
         },
         items : [{
-            xtype : 'textfield'
+            xtype : 'textfield',
+            name : 'adminId'
         },{
             xtype : 'textfield',
-            inputType : 'password'
+            inputType : 'password',
+            name : 'adminPwd'
         },{
             xtype : 'button',
             width: 165,
@@ -29,7 +31,4 @@
             handler : 'loginBtn',
         }]
     }]
-
-
-  
 });

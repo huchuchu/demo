@@ -17,7 +17,19 @@ Ext.define('Study.Application', {
 
     // application 이 뜨면서 login.js를 호출한다
     launch : function(){
-      Ext.widget("login"); 
+      Ext.Ajax.request({
+        url : '/api/sessioncheck',
+        method : 'POST',
+        success : function(res){
+            var api = Ext.decode(res.responseText);
+            if(api['code'] == 999){
+                Ext.widget("login");
+            }else{
+                Ext.widget("main");
+            }
+        }
+      });  
+    //   Ext.widget("login"); 
       //  class명으로도 가능
       //   Ext.create("Study.view.main.Main");
     },

@@ -1,6 +1,5 @@
  package com.market.demo.controller;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.market.demo.dao.LoginDao;
@@ -19,7 +19,7 @@ public class LoginController {
 	@Autowired
 	private LoginDao logindao;
 	
-	@RequestMapping(value="/loginInfo")
+	@RequestMapping(value="/loginInfo", method = RequestMethod.POST)
 	public Map<String, Object> loginInfo(Admin param, HttpServletRequest req) {
 		
 		Map<String, Object> result = null;
