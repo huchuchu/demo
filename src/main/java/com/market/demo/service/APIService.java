@@ -27,5 +27,13 @@ public class APIService {
 	public void addProduct(Product param) throws SQLException{
 		apiDao.addProduct(param);		
 	}
+	
+	public void deleteProduct(Product param) throws SQLException {
+		apiDao.deleteProduct(param);
+	}
+	
+	public void updateProduct(Product param) throws SQLException {
+		apiDao.updateProduct(param);
+	}
 
 }

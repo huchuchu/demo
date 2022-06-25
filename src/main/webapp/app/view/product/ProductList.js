@@ -39,11 +39,15 @@
             handler : 'addProduct'
         },{
             xtype: 'button',
-            text : '초기화'
+            text : '초기화',
+            handler : 'formatBtn'
         }
         ]
     },{
         xtype : 'grid',
+        listeners : {
+            celldblclick : 'onUpdateForm'
+        },
         viewConfig : {
             emptyText : '상품이 존재하지않습니다'
         },
@@ -52,10 +56,15 @@
         columnLines : true,
         tbar : [{
             xtype : 'textfield',
-            emptyText : '찾을 상품명을 입력하세요'
+            emptyText : '찾을 상품명을 입력하세요',
+            name : 'searchValue',
+            bind : {
+                value : '{searchValue}'
+            }
         },{
             xtype : 'button',
-            text : '검색'
+            text : '검색',
+            handler : 'searchBtn'
         }],
         columns :[{
             xtype : 'rownumberer'
@@ -74,7 +83,25 @@
         },{
             text : '등록일',
             dataIndex : 'itemRegDt',
-            flex : 1
+            flex : 1,
+            // renderer : 실제 데이터가 바뀌는게 아니라 화면상의 데이터만 
+            renderer : function(value){
+                if(value != undefined && value != null && value != ""){
+                    return Ext.util.Format.date(new Date(value), "Y-m-d H:i:s")
+                }
+                 return value;
+            }
+        },
+        {
+            xtype: 'widgetcolumn',
+            text : '삭제',
+            align : 'center',
+            flex : 1,
+            widget : {
+                xtype : 'button',
+                text : '상품삭제',
+                handler : 'removeBtn'
+            }
         }
         ],
         bind : {

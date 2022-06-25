@@ -16,25 +16,67 @@ public class APIDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	/**
+	 * 상품 목록 수 조회
+	 * @param param
+	 * @return
+	 * @throws SQLException
+	 */
 	public Long listProductTotalCount(Product param) throws SQLException {
-		String query = "select count(item_seq) totalCount from item";	
+		String query = "select count(item_seq) totalCount from item";
+		if(param.getSearchValue() !=null && !param.getSearchValue().contentEquals("")) {
+			query += " WHERE item_name LIKE CONCAT('%','"+param.getSearchValue()+"','%') ";			
+		}
 		
 		return (Long) jdbcTemplate.queryForMap(query).get("totalCount");
 	}
 
+	/**
+	 * 상품 목록 조회
+	 * @param param
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Map<String, Object>> listProduct(Product param) throws SQLException {
-		String query = "select item_name itemNm, item_price itemPrc, item_amount itemAmt, item_regdate itemRegDt  from item";	
-		
+		String query = "select item_seq itemSeq, item_name itemNm, item_price itemPrc, item_amount itemAmt, item_regdate itemRegDt  from item";	
+		if(param.getSearchValue() != null && !param.getSearchValue().equals("")) {
+			query += " where item_name LIKE CONCAT('%','"+param.getSearchValue()+"','%')";
+		}
+//		query += "LIMIT " + param.getStart() + "," + param.getLimit();		
 		return jdbcTemplate.queryForList(query);
 	}
 
+	/**
+	 * 상품 등록
+	 * @param param
+	 * @throws SQLException
+	 */
 	public void addProduct(Product param) throws SQLException {
 		
 		String query = "insert into item (item_name, item_price, item_amount, item_regdate) values(?,?,?,now())";
 		jdbcTemplate.update(query, new Object[] {param.getItemNm(), param.getItemPrc(), param.getItemAmt()});
 	
 	}
+	/**
+	 * 상품 삭제
+	 * @param param
+	 * @throws SQLException
+	 */
+	public void deleteProduct(Product param) throws SQLException{
+		String query = "delete from item where item_seq=?";
+		jdbcTemplate.update(query, new Object[] {param.getItemSeq()});
+	}
 	
+	/**
+	 * 상품 수정
+	 * @param param
+	 */
+	public void updateProduct(Product param) throws SQLException {
+		String query = "update item "
+				+ "set item_name = ?, item_price = ?, item_amount = ?"
+				+ " where item_seq  = ?";
+		jdbcTemplate.update(query, new Object[] {param.getItemNm(), param.getItemPrc(), param.getItemAmt(), param.getItemSeq()});
+	}
 	
 
 }

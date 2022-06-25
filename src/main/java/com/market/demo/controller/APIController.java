@@ -38,13 +38,15 @@ public class APIController {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map<String, Object>> data = null;
+		
 		try {
 			Long totalCount = 0L;
 					totalCount = apiService.listProductTotalCount(param);
-			System.out.println("totalcnt" + totalCount);
+					
 			if(totalCount > 0) {
 				data = apiService.listProduct(param);
 			}
+			
 			result.put("code", 200);
 			result.put("totalCount", totalCount);
 			result.put("data", data);
@@ -79,7 +81,51 @@ public class APIController {
 			result.put("msg", "상품등록실패");
 			return result;
 		}
+			
+		return result;
+	}
 	
+	/**
+	 * 상품 삭제 API
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/delete/Product", method = RequestMethod.POST)
+	public Map<String, Object> deleteProduct(Product param) {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			apiService.deleteProduct(param);
+			result.put("code", 200);
+		}catch (Exception e) {
+			e.printStackTrace();
+			result.put("code", e.getMessage());
+			result.put("msg", "상품삭제실패");
+		}
+		
+		return result;
+
+	}
+	
+	/**
+	 * 상품 수정 API
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/update/Product", method = RequestMethod.POST)
+	public Map<String, Object> updateProduct(Product param) {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		try {
+			apiService.updateProduct(param);
+			result.put("code", 200);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			result.put("code", e.getMessage());
+			result.put("msg", "상품 수정 실패");
+		}
 		
 		return result;
 	}
