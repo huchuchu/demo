@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.market.demo.dao.APIDao;
+import com.market.demo.domain.Member;
 import com.market.demo.domain.Product;
 
 @Service
@@ -34,6 +35,14 @@ public class APIService {
 	
 	public void updateProduct(Product param) throws SQLException {
 		apiDao.updateProduct(param);
+	}
+
+	public Long listMemberTotalCount(Member param) throws SQLException {
+		return apiDao.listMemberTotalCount(param);
+	}
+
+	public List<Map<String, Object>> listMember(Member param) throws SQLException {
+		return apiDao.listMember(param);
 	}
 
 }

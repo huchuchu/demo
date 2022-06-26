@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.market.demo.domain.Member;
 import com.market.demo.domain.Product;
 import com.market.demo.service.APIService;
 
@@ -30,6 +31,7 @@ public class APIController {
 	
 	
 	/**
+	 * ====================== 상품 API ======================
 	 * 상품 목록 API
 	 * @return
 	 */
@@ -128,6 +130,38 @@ public class APIController {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * ====================== 회원 API ======================
+	 * 회원목록조회 API
+	 * @param req
+	 * @param param
+	 * @return
+	 */
+	@RequestMapping(value = "/list/member", method = RequestMethod.POST)
+	public Map<String, Object> listMember(HttpServletRequest req, Member param){		
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Map<String, Object>> data = null;
+		try {
+			Long totalCount = 0L;
+			totalCount = apiService.listMemberTotalCount(param);
+			
+			if(totalCount>0) {
+				data = apiService.listMember(param);
+			}
+			
+			result.put("code", 200);
+			result.put("totalCount", totalCount);
+			result.put("data", data);			
+		}catch (Exception e) {
+			e.printStackTrace();
+			result.put("code", e.getMessage());
+			result.put("msg", "회원목록죄회 실패");
+		}
+				
+		return result;
+		
 	}
 	
 

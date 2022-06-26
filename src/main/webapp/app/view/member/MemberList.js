@@ -1,56 +1,71 @@
  Ext.define('Study.view.member.MemberList', {
     extend: 'Ext.grid.Panel',
+    listeners : {
+        boxready : 'onLoadData'
+    },  
     xtype: 'memberList',
     controller : 'memberList',
     viewModel : 'memberList',
-    title : '회원목록',
+    title : '회원목록 조회',
     columnLines : true,
     plugins : 'cellediting',
     tbar : [{
         xtype : 'combo',
-        displayField : 'a',
-        valueField : 'b',
+        editable : false,
+        displayField : 'key',
+        valueField : 'value',
+        queryMode : 'local',
+        value : 'member_id',
+        name : 'searchCode',
         store : {
-            fields : ['a', 'b'],
+            fields : ['key','value'],
             data : [{
-                a : 'a',
-                b : 'b'
+                key : '아이디',
+                value : 'member_id'
+            },{
+                key : '이름',
+                value : 'member_name'
             }]
         }
     },{
         xtype : 'textfield',
+        name : 'searchValue',
         emptyText : '검색어를 입력하세요'
     },{
         xtype : 'button',
-        text : '검색'
+        text : '검색',
+        handler : 'searchBtn',
     }],
     columns :[{
         xtype : 'rownumberer'
     },{
-        text : '상품명',
-        dataIndex : 'productNm',
+        text : '아이디',
+        dataIndex : 'memberId',
+        flex : 1
+    },{
+        text : '이름',
+        dataIndex : 'memberNm',
         flex : 1,
         editor : {
             xtype : 'textfield'
         }
     },{
-        text : '가격',
-        dataIndex : 'price',
+        text : '주소',
+        dataIndex : 'memberAddr',
         flex : 1,
         editor : {
-            xtype : 'numberfield'
+            xtype : 'textfield'
         }
     },{
-        text : '재고량',
-        dataIndex : 'amount',
+        text : '가입일',
+        dataIndex : 'memberRegDt',
         flex : 1,
-        editor : {
-            xtype : 'numberfield'
+        renderer : function(value){
+            if(value != undefined && value != null && value !=""){
+                return Ext.util.Format.date(new Date(value), "Y-m-d H:i:s")
+            }
+            return value;
         }
-    },{
-        text : '등록일',
-        dataIndex : 'rgstrDt',
-        flex : 1
     }
     ],
     bind : {
