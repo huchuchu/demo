@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.market.demo.dao.APIDao;
 import com.market.demo.domain.Member;
+import com.market.demo.domain.Order;
 import com.market.demo.domain.Product;
 
 @Service
@@ -41,8 +43,16 @@ public class APIService {
 		return apiDao.listMemberTotalCount(param);
 	}
 
-	public List<Map<String, Object>> listMember(Member param) throws SQLException {
+	public List<Map<String, Object>> listMember(Member param) throws EmptyResultDataAccessException, SQLException   {
 		return apiDao.listMember(param);
+	}
+
+	public Long listOrderTotalCount(Order param) throws SQLException {
+		return apiDao.listOrderTotalCount(param);
+	}
+
+	public List<Map<String, Object>> listOrder(Order param) throws SQLException {
+		return apiDao.listOrder(param);
 	}
 
 }

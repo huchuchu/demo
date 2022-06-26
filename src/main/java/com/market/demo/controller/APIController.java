@@ -7,11 +7,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.market.demo.domain.Member;
+import com.market.demo.domain.Order;
 import com.market.demo.domain.Product;
 import com.market.demo.service.APIService;
 
@@ -162,6 +164,30 @@ public class APIController {
 				
 		return result;
 		
+	}
+	
+	@RequestMapping(value = "/list/order", method = RequestMethod.POST)
+	public Map<String, Object> listOrder(HttpServletRequest req, Order param){
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Map<String, Object>> data = null;
+		
+		try {
+			Long totalCount = 0L;
+			totalCount = apiService.listOrderTotalCount(param);		
+			if(totalCount > 0) {
+				data = apiService.listOrder(param);
+			}
+			result.put("code", 200);
+			result.put("totalCount", totalCount);
+			result.put("data", data);
+
+		}catch (Exception e ) {
+			e.printStackTrace();
+			result.put("code", e.getMessage());
+			result.put("msg", "주문목록조회 실패");
+		}
+		
+		return result;
 	}
 	
 
